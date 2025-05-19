@@ -21,13 +21,10 @@ import dash
 
 """#  Carregando e preparando os dados"""
 
-from google.colab import drive
-drive.mount('/content/drive')
-
 # Unificando as tabelas com as vendas dos anos de 2020, 2021 e 2022:
-arquivos_vendas = [ '/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2020.xlsx',
-'/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2021.xlsx',
-'/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2022.xlsx' ]
+arquivos_vendas = [ 'Base Vendas - 2020.xlsx',
+'Base Vendas - 2021.xlsx',
+'Base Vendas - 2022.xlsx' ]
 
 lista_vendas = [pd.read_excel(arquivo) for arquivo in arquivos_vendas]
 df_vendas = pd.concat(lista_vendas, ignore_index=True)
@@ -38,17 +35,17 @@ print(f"Base unificada  - Total de registros: {len(df_vendas)}")
 print(df_vendas.head())
 
 # Leitura_Cadastros
-df_clientes = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Clientes.xlsx', header=2)
+df_clientes = pd.read_excel('Cadastro Clientes.xlsx', header=2)
 print(df_clientes.columns)
 
 print("Colunas do df_clientes:", df_clientes.columns.tolist())
 
 df_clientes = df_clientes.drop(columns=[' ', 'Unnamed: 11'], errors='ignore')
 
-df_lojas = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Lojas.xlsx')
-df_produtos = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Produtos.xlsx')
+df_lojas = pd.read_excel('Cadastro Lojas.xlsx')
+df_produtos = pd.read_excel('Cadastro Produtos.xlsx')
 
-pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Clientes.xlsx', header=None).head(10)
+pd.read_excel('Cadastro Clientes.xlsx', header=None).head(10)
 
 print(df_vendas.columns.tolist())
 
@@ -60,7 +57,7 @@ print(df_lojas.columns.tolist())
 
 """# Tratamento da tabela Clientes"""
 
-df_clientes = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Clientes.xlsx', header=2)
+df_clientes = pd.read_excel('Cadastro Clientes.xlsx', header=2)
 
 colunas_clientes = ['ID Cliente', 'Primeiro Nome', 'Sobrenome', 'Email', 'Genero', 'Data Nascimento', 'Estado Civil', 'Num Filhos', 'Nivel Escolar', 'Documento', 'Coluna10', 'Coluna11']  # Ajuste nomes conforme o arquivo real
 
@@ -97,9 +94,9 @@ print(df_vendas.columns.tolist())
 """# Unificação das bases de vendas:"""
 
 #Leitura das bases de vendas dos anos 2020, 2021 e 2022
-df_vendas2020 = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2020.xlsx')
-df_vendas2021 = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2021.xlsx')
-df_vendas2022 = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Base Vendas - 2022.xlsx')
+df_vendas2020 = pd.read_excel('Base Vendas - 2020.xlsx')
+df_vendas2021 = pd.read_excel('Base Vendas - 2021.xlsx')
+df_vendas2022 = pd.read_excel('Base Vendas - 2022.xlsx')
 
 #Padronizando os nomes das colunas das bases de vendas
 colunas_padrao = ['Data da Venda', 'Ordem de Compra', 'ID Produto', 'ID Cliente', 'Qtd Vendida', 'ID Loja']
@@ -111,9 +108,9 @@ df_vendas2022.columns = colunas_padrao
 df_vendas = pd.concat([df_vendas2020, df_vendas2021, df_vendas2022], ignore_index=True)
 
 # Leitura das  tabelas
-df_clientes = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Clientes.xlsx', skiprows=2)
-df_produtos = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Produtos.xlsx')
-df_lojas = pd.read_excel('/content/drive/MyDrive/Dashboards com Dash/Cadastro Lojas.xlsx')
+df_clientes = pd.read_excel('Cadastro Clientes.xlsx', skiprows=2)
+df_produtos = pd.read_excel('Cadastro Produtos.xlsx')
+df_lojas = pd.read_excel('Cadastro Lojas.xlsx')
 
 # Unificando nome dos clientes: Primeiro Nome + Sobrenome:
 if 'Primeiro Nome' in df_clientes.columns and 'Sobrenome' in df_clientes.columns:
